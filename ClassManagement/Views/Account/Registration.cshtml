@@ -1,0 +1,140 @@
+﻿@model ClassManagement_ModelLibrary.Class_Model.UserRegistration
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <h4>Registration Form</h4>
+
+    @if (TempData["Data"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Data"]
+        </div>
+    }
+    <script src="/path/to/jquery.richtext.min.js"></script>
+    <script src="/path/to/cdn/jquery.min.js"></script>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Registration">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="UserName" class="control-label"></label>
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+                            </div>
+                            <input asp-for="UserName" class="form-control" />
+                        </div>
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Password" class="control-label"></label>
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="fa-solid fa-lock"></i>
+                                </div>
+                            </div>
+                            <input asp-for="Password" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Email" class="control-label"></label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                            </div>
+                            <input asp-for="Email" id="txtEmail" class="form-control" />
+                            @*  *@
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="MobileNo" class="control-label"></label>
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                            </div>
+                            <input asp-for="MobileNo" class="form-control" />
+                        </div>
+                        <span asp-validation-for="MobileNo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Address" class="control-label"></label>
+
+                        <textarea asp-for="Address" cols="6" rows="4" class="form-control Edit_Textarea"></textarea>
+                        @*<input asp-for="Address" class="form-control" />*@
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label asp-for="CaptchCode" class="control-label"></label>
+                        @*@Html.TextBoxFor(model => Model.CaptchCode,6,40,null)*@
+                        <input asp-for="CaptchCode" value="@ViewBag.Captch" class="form-control" readonly style="height:50px; width:150px; font-size:30px; text-align:left; color:darkgrey; font:italic">
+                        <span asp-validation-for="CaptchCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label asp-for="OTP" class="control-label"></label>
+                        <input asp-for="OTP" class="form-control" />
+                        <span asp-validation-for="OTP" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-check col-md-1">
+                        <label class="form-check-label">
+                            @Html.DisplayNameFor(model => model.IsActive)
+                        </label>
+                        <div style="margin-left:20px;">
+                            <input class="form-check-input" asp-for="IsActive" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <input type="submit" value="SignIn" id="btnSubmit" class="btn btn-primary btn-block" />
+                    </div>
+                    <div class="col-md-3">
+                        <a asp-action="Index" asp-controller="Home" class=" btn btn-primary btn-block">Back</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.17/js/froala_editor.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //$('#Address').summernote({
+            //    height: 30,
+            //    width:500,
+            //    minheight: null,
+            //    maxHeight: null,
+            //    focus: true,
+            //    tabsize: 2,
+            //  });
+
+        $('#btnGet').click(function () {
+            var url = "@Url.Action("CaptchCodeVerified", "Account")?StrEmail=" + $('#txtEmail').val()
+            location.href = url
+        });
+
+        tinymce.init({
+            selector: 'textarea'
+        });
+    });
+    </script>
+
+
+
+
+
+

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ClassManagement_ModelLibrary.Class_Model.DesignationList>
+
+<p>
+    <a asp-action="AddEditDesignationList" asp-controller="Category" class="btn btn-primary">Create New</a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DesignationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EditedOn)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DesignationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EditedOn)
+            </td>
+            <td>
+                <a asp-action="AddEditDesignationList" asp-controller="Category" asp-route-id="@item.DesignationId" class="btn btn-primary"><i class="fa-solid fa-pen-to-square fa-lg"></i></a> |
+                @*<a asp-action="Details" asp-route-id="@item.DesignationId">Details</a> |*@
+                @*<a asp-action="Delete" asp-route-id="@item.DesignationId">Delete</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

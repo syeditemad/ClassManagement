@@ -1,0 +1,65 @@
+﻿@model ClassManagement_ModelLibrary.Class_Model.CourseList
+
+<h4>CourseList</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddEditCourseList">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label asp-for="DesignationId" class="control-label"></label>
+                    <select asp-for="DesignationId" class="form-control" asp-items="ViewBag.DesignationList">
+                        <option value="0">Select Course</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="AuthorName" class="control-label"></label>
+                    <input asp-for="AuthorName" class="form-control" />
+                    <span asp-validation-for="AuthorName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="CourseName" class="control-label"></label>
+                    <input asp-for="CourseName" class="form-control" />
+                    <span asp-validation-for="CourseName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="CourseContent" class="control-label"></label>
+                    <input asp-for="CourseContent" class="form-control" />
+                    <span asp-validation-for="CourseContent" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Amount" class="control-label"></label>
+                    <input asp-for="Amount" class="form-control" />
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="CreatedOn" class="control-label"></label>
+                    <input asp-for="CreatedOn" class="form-control" />
+                    <span asp-validation-for="CreatedOn" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="EditedOn" class="control-label"></label>
+                    <input asp-for="EditedOn" class="form-control" />
+                    <span asp-validation-for="EditedOn" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <input type="submit" value="Create" class="btn btn-primary btn-block" />|
+
+                </div>
+                <div class=" form-group col-md-6">
+                    <a asp-action="Index" class="btn btn-primary btn-block">Back</a>
+                </div>
+            </div>
+           
+        </form>
+    </div>
+</div>
+
+<div>
+   
+</div>
+

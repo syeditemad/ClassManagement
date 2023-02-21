@@ -1,0 +1,90 @@
+﻿@model IEnumerable<ClassManagement.Models.AddTOCartList>
+
+<p> <strong>AddTO Cart List</strong> </p>
+<style>
+    td {
+        width: 45px;
+        
+    }
+    td.Wordrap{
+        word-wrap:break-word;
+    }
+</style>
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            @*<th>
+                @Html.DisplayNameFor(model => model.DesignationId)
+            </th>*@
+            @*<th>
+                @Html.DisplayNameFor(model => model.CourseId)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.CourseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseContent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+
+            @*<th>
+            @Html.DisplayNameFor(model => model.DesignationId)
+        </th>*@
+            @*<th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>*@
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.DesignationId)
+            </td>*@
+            @*<td>
+                @Html.DisplayFor(modelItem => item.CourseId)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorName)
+            </td>
+
+            <td class="Wordrap">
+                @Html.DisplayFor(modelItem => item.CourseContent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Courses.CourseName)
+        </td>*@
+            @*<td>
+            @Html.DisplayFor(modelItem => item.EditedOn)
+        </td>*@
+            @*<td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>*@
+            <td class="dropdown">
+                <a href="#" id="CourseDropDownMenuLink" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</a>
+                <div class="dropdown-menu" aria-labelledby="CourseDropDownMenuLink">
+                    <a asp-action="PaymentModeList" asp-controller="Category" asp-route-id="@item.ProductId" class="btn btn-success">Payment</a> 
+                    <form asp-controller="Category" asp-action="Delete" asp-route-id="@item.ProductId" method="post" onclick="return confirm('Are you sure you want to delete?')">
+                        <input type="submit" value="Delete" class="btn btn-danger" data-toggle="Delete this record" />
+                   </form>
+                </div>
+              </td>
+        </tr>
+}
+    </tbody>
+</table>

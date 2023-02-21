@@ -1,0 +1,181 @@
+﻿@inject SignInManager<IdentityUser> signInManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ClassManagement</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,100&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ClassManagement</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li>&nbsp;&nbsp;&nbsp;</li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">About</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="EmployeeDetails" asp-action="Index">Employee_Info</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="AddtoCart"><i class="fa-solid fa-cart-circle-exclamation f"></i>AddtoCart</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" id="CourseDropDownMenuLink" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Categories
+                                </a>
+                                <div class="dropdown-menu progress-bar-striped" aria-labelledby="CourseDropDownMenuLink">
+                                    <a asp-action="Index" asp-controller="Category" class="dropdown-item btn-outline-primary">CourseList</a>
+                                    <a asp-action="GetDevelopementCourseList" asp-controller="Category" asp-route-id="1" class="dropdown-item btn-outline-primary">Development</a>
+                                    <a asp-action="GetDevelopementCourseList" asp-controller="Category" class="dropdown-item" asp-route-id="2">Business</a>
+                                    <a asp-action="GetDevelopementCourseList" asp-controller="Category" class="dropdown-item" asp-route-id="3">Finance & Accounting  </a>
+                                    <a asp-action="GetDevelopementCourseList" asp-controller="Category" class="dropdown-item" asp-route-id="4">Digital & Marketing</a>
+                                    <a asp-action="GetDevelopementCourseList" asp-controller="Category" class="dropdown-item" asp-route-id="5">IT & Software</a>
+                                    <a asp-action="GetDevelopementCourseList" asp-controller="Category" class="dropdown-item" asp-route-id="6">OFF Productivity</a>
+                                    <a asp-action="GetDevelopementCourseList" asp-controller="Category" class="dropdown-item" asp-route-id="7">Personel Development</a>
+                                    @*<a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="EmployeePurchaseList">OrderPlaces</a>*@
+                                </div>
+                            </li>
+                            if (User.IsInRole("Admin"))
+                            {
+
+                                <li class="nav-item dropdown">
+                                    <a href="#" id="navbarDropDownMenuLink" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Manager
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
+                                        <a asp-action="ListUsers" asp-controller="Administration" class="dropdown-item">User</a>
+                                        <a asp-action="ListRoles" asp-controller="Administration" class="dropdown-item">Role</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="GetDesignationList">Designation</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a href="#" id="navbarDropDownMenuLink1" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Product PurchaseList
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink1">
+                                        @*<a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="GetDesignationList">Designation</a>*@
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="EmployeePurchaseList">OrderPlaces</a>
+                                    </div>
+                                </li>
+                                @*<li class="nav-item">
+                                               <a class="nav-link text-dark" asp-area="" asp-controller="EmployeeDetails" asp-action="Index">Employee_Info</a>
+                                    </li>
+                                    <li class="nav-item dropdown ml-auto">
+
+                                         <form method="post" asp-controller="Account" asp-action="LogOut">
+                                               <button type="submit" class="nav-link btn btn-link py-0">
+                                                   Logout @User.Identity.Name
+                                               </button>
+                                        </form>
+                                        </li>*@
+                            }
+
+                    <li class="nav-item dropdown ml-auto">
+                        <a href="#" id="navbarDropDownMenuLink1" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           SETTING
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink1">
+                            @*<a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="GetDesignationList">Designation</a>*@
+                            <a class="nav-link text-dark text-center" asp-controller="Account" asp-action="ChangePassword">ChangePassword</a>
+                            <form method="post" asp-controller="Account" asp-action="LogOut">
+                                <button type="submit" class="nav-link btn btn-link py-0" style="width:auto">
+                                    Logout @User.Identity.Name
+                                </button>
+                            </form>
+                        </div>
+
+                        @*<a class="nav-item btn-warning dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             @User.Identity.Name;
+                            </a>*@
+
+                                            @*<div class="dropdown-menu btn-warning" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">Change Paaaword</a>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="LogOut">Logout</a>
+                            </div>*@
+                    </li>
+
+                        }
+                        else
+                        {
+                            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                            <li class="nav-item ml-auto">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Registration"><span class="fas fa-user"></span>Sign Up</a>
+                            </li>
+                            <li class="nav-item ml-auto" style="margin-right:100px;">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login"><span class="fas fa-sign-in-alt"></span> Login</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <div class="modal" tabindex="-1" role="dialog" id="form-modal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    @*<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">#</span>
+                        </button>*@
+                </div>
+                <div class="modal-body">
+
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - ClassManagement - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+    <script>
+        function OnComplete() {
+            $("#form-modal").modal("hide");
+        }
+    </script>
+</body>
+</html>

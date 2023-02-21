@@ -1,0 +1,66 @@
+﻿@model ClassManagement_ModelLibrary.Class_Model.CountryState
+<style>
+    .error{
+       color:red;
+    }
+</style>
+<h4>CountryState</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddEditview" id="CountryState_AddEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="CountryId" class="control-label">Country</label>
+                    <div class="input-group">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <i class="fa-solid fa-globe"></i>
+                            </div>
+                        </div>
+                        <select asp-for="CountryId" class="form-control text-center" 
+                                asp-items="ViewBag.CountryList" required>
+                        </select>
+                    </div>
+                    <span asp-validation-for="CountryId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="StateCode" class="control-label"></label>
+                    <input asp-for="StateCode" class="form-control" />
+                    <span asp-validation-for="StateCode" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="StateName" class="control-label"></label>
+                    <input asp-for="StateName" class="form-control" />
+                    <span asp-validation-for="StateName" class="text-danger"></span>
+                </div>
+                @*<div class="form-group">
+            <label asp-for="CreatedOn" class="control-label"></label>
+            <input asp-for="CreatedOn" class="form-control" />
+            <span asp-validation-for="CreatedOn" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EditedOn" class="control-label"></label>
+            <input asp-for="EditedOn" class="form-control" />
+            <span asp-validation-for="EditedOn" class="text-danger"></span>
+        </div>*@
+              
+            </div>
+          
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <input type="submit" value="Create" class="btn btn-primary btn-block" />
+                </div>
+                <div class="col-md-3">
+                    <a asp-action="Index" asp-controller="EmployeeDetails" class="btn btn-primary">Back to List</a>
+                </div>
+
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+
+

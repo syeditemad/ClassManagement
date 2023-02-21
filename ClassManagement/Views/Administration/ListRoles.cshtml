@@ -1,0 +1,46 @@
+﻿@model IEnumerable<IdentityRole>
+@{ 
+    ViewBag.Title = "All Roles";
+}
+<h1>All Roles </h1>
+@if (Model.Any())
+{
+
+    <a asp-controller="Administration" asp-action="CreateRole" class="btn btn-primary" style="width:auto">
+        Add New Roles
+    </a>
+
+     foreach(var roles in Model)
+                {
+                    <div class="card mb-3">
+                        <div class="card-header">
+                           Role Id: @roles.Id;
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title">@roles.Name</h5>
+                        </div>
+                        <div class="card-footer">
+                            <a  class="btn btn-primary" asp-action="EditRole" asp-controller="Administration"
+                             asp-route-id="@roles.Id">Edit</a>
+                            <a  class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="card">
+                    <div class="card-header">
+                        No Roles Created yet
+                    </div>
+                    <div class="card-body">
+                     <h5 class="card-title">
+                         use The Button below to Create the Role
+                     </h5>
+                        <a class="btn btn-primary" style="width:auto" asp-controller="Administration" asp-action="CreateRole">
+                            Create Role
+                        </a>
+                    </div>
+                   
+                </div>
+            }

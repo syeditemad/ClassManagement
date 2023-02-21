@@ -1,0 +1,94 @@
+﻿@inject SignInManager<IdentityUser> signInManager
+@model IEnumerable<ClassManagement_ModelLibrary.Class_Model.CourseList>
+
+@if (signInManager.IsSignedIn(User))
+{
+
+    if (User.IsInRole("Admin"))
+    {
+        <p>
+            <a asp-action="AddEditCourseList" asp-controller="Category" class="btn btn-primary">Create New</a>
+        </p>
+    }
+
+}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.DesignationId)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseContent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.CreatedOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EditedOn)
+                </th>*@
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.DesignationId)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseContent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.CreatedOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EditedOn)
+                    </td>*@
+                <td>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+
+                        if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="AddEditCourseList" asp-controller="Category" class="btn btn-primary" asp-route-id="@item.CourseId">Edit</a>
+                            <a asp-action="DeleteCourseList" asp-controller="Category" class="btn btn-danger" asp-route-id="@item.CourseId">Delete</a>
+
+                        }
+                        else
+                        {
+                            <a asp-action="PurchaseCourseList"  asp-controller="Category" asp-route-id="@item.CourseId" class="btn btn-primary">Add To Cart</a>
+                        }
+
+                        //<i class="fa-duotone fa-cart-shopping fa-3x"></i>
+                    }
+
+
+                    @*<a asp-action="Delete" asp-route-id="@item.CourseId">Delete</a>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index" asp-controller="Category" class="btn btn-primary">Back</a>
+</div>

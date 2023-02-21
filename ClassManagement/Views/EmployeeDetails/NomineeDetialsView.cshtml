@@ -1,0 +1,75 @@
+﻿@model ClassManagement_ModelLibrary.Class_Model.NomineeDetails
+
+@{ 
+    ViewData["Title"] = "Details";
+    Layout = null;
+}
+<div>
+    <h4 class="text-uppercase text-center" >NomineeDetails</h4>
+    <hr />
+
+    <div class="col-md-12">
+        <div class="row" >
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="NomineeName" class="control-label"></label>
+                    <input asp-for="NomineeName" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="NomineeImage" class="control-label"></label>
+                    <input asp-for="NomineeImage" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="NomineeWork" class="control-label"></label>
+                    <input asp-for="NomineeWork" class="form-control" readonly />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Gender" class="control-label"></label>
+                    @Html.DropDownList("Gender", new List<SelectListItem>
+          {
+              new SelectListItem{ Text="Male", Value = "1" },
+              new SelectListItem{ Text="Female", Value = "2" },
+              new SelectListItem{Text="Transgender", Value="3"}
+              }, "Select Gender",   htmlAttributes: new { @class = "form-control" }  );
+                    
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="DateofBirth" class="control-label"></label>
+                    <input asp-for="DateofBirth" class="form-control" readonly />
+                        </div>
+                <div class="form-group">
+                    <label asp-for="AdhareCardNo" class="control-label"></label>
+                    <input asp-for="AdhareCardNo" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" readonly />
+                </div>
+                <div class="form-group">
+                    <label asp-for="MobileNo" class="control-label"></label>
+                    <input asp-for="MobileNo" class="form-control" readonly />
+                    <span asp-validation-for="MobileNo" class="text-danger"></span>
+                </div>
+                @*<div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="isAcitveded" /> @Html.DisplayNameFor(model => model.isAcitveded)
+                    </label>
+                </div>*@
+            </div>
+        </div>
+    </div>
+
+   
+</div>
+<div>
+    @*<a asp-action="Edit" class="btn btn-info btn-block disabled" asp-route-id="@Model.EmployeeId">Edit</a> |*@
+    @*<a asp-action="Index">Back to List</a>*@
+</div>

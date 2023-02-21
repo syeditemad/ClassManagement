@@ -1,0 +1,156 @@
+﻿@model ClassManagement_ModelLibrary.Class_Model.NomineeDetails
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = null;
+}
+
+<style>
+    .error{
+        color:red;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <form enctype="multipart/form-data" asp-action="CreateNomineeDetails" id="Nominee_AddEdit" class="was-validated">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="NomineeName" class="control-label"></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        </div>
+                        <input asp-for="NomineeName" class="form-control" />
+                    </div>
+                    <span asp-validation-for="NomineeName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="NomineePic" class="control-label"></label>
+                    <div class="custom-file">
+                        <input asp-for="NomineePic" class="form-control custom-file-input" id="FLFontImage" />
+                        <label class="custom-file-label" for="FLFontImage">Choose File..</label>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="NomineeWork" class="control-label"></label>
+                    <input asp-for="NomineeWork" class="form-control" />
+                    <span asp-validation-for="NomineeWork" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Gender" class="control-label"></label>
+                    @* @Html.DropDownList("Gender", ViewBag.EnumList as SelectList,new {@class="form-control" })*@
+                    <select asp-for="Gender" asp-items="@ViewBag.EnumList" class="form-control">
+                        <option selected="selected" value="">Please select</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group col-md-6">
+                    <label asp-for="DateofBirth" class="control-label"></label>
+                    <input asp-for="DateofBirth" class="form-control" />
+                    <span asp-validation-for="DateofBirth" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="AdhareCardNo" class="control-label"></label>
+                    <input asp-for="AdhareCardNo" class="form-control" />
+                    <span asp-validation-for="AdhareCardNo" class="text-danger"></span>
+                </div>
+
+                @*<div class="form-group">
+                    <label asp-for="NomineePic" class="control-label"></label>
+                      <div class="custom-file">
+                      <input asp-for="NomineePic" class="form-control custom-control-input" id="FLFontImage" />
+                        <label class="custom-control-label" >Choose File</label>
+                    </div>
+                    </div>*@
+                @*<div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="isAcitveded" /> @Html.DisplayNameFor(model => model.isAcitveded)
+                        </label>
+                    </div>*@
+                <div class="form-group col-md-6">
+                    <label asp-for="Email" class="control-label"></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                        </div>
+                        <input asp-for="Email" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="MobileNo" class="control-label"></label>
+                    <input asp-for="MobileNo" class="form-control" />
+                    <span asp-validation-for="MobileNo" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                </div>
+                <div class="col-md-3">
+                    <a asp-action="Index" asp-controller="EmployeeDetails" class="btn btn-info btn-block" >Close</a>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+@*<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>*@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script type="text/javascript"></script>
+
+    <script type="text/javascript">
+        // Add the following code if you want the name of the file appear on select
+        //$(".custom-file-input").on("change", function () {
+        //    var fileName = $(this).val().split("\\").pop();
+        //    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        //});
+        $(document).ready(function () {
+            $("#Nominee_AddEdit").validate({
+                rules: {
+                    NomineeName: {
+                        required: true
+                    },
+                    NomineePic: {
+                        required: true
+                    },
+                    NomineeWork: {
+                        required: true
+                    },
+                    Gender: {
+                        required: true
+                    },
+                    DateofBirth: {
+                        required: true
+                    },
+                    AdhareCardNo: {
+                        required: true
+                    },
+                    Email: {
+                        required: true
+                    },
+                    MobileNo: {
+                        required: true
+                    },
+
+                },
+            });
+
+        });
+
+
+    </script>

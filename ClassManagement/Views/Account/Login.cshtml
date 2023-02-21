@@ -1,0 +1,174 @@
+﻿@model ClassManagement_ModelLibrary.Class_Model.UserRegistration
+@inject SignInManager<IdentityUser> _signInManager
+@{
+    ViewBag.Title = "Login";
+}
+
+<h4>Login </h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                    </div>
+                    <input asp-for="UserName" class="form-control" />
+                </div>
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                    </div>
+                    <input asp-for="Password" class="form-control" id="Password" />
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-eye" id="ShowPassword"></i>
+                            @*<input type="checkbox" ID="ShowPassword" Class="form-check fa-solid fa-eye " />*@
+                        </span>
+                    </div>
+                </div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            @*<div class="form-group col-md-6">
+                    <label asp-for="Email" class="control-label"></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                        </div>
+                        <input asp-for="Email" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>*@
+            @*<div class="form-group">
+                       <label asp-for="MobileNo" class="control-label"></label>
+                        <input asp-for="MobileNo" class="form-control" />
+                        <span asp-validation-for="MobileNo" class="text-danger"></span>
+                </div>*@
+            @*<div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>*@
+            @*<div class="g-recaptcha" data-type="image" data-sitekey="6LcE7A0kAAAAAIOYvc9zzlkbXoOGPz3vFlhZe1hT">
+
+                </div>*@
+            <div class="g-recaptcha form-group" data-sitekey="6LfsehEkAAAAANdmI5VrHDch0nV8kwQ95Pc-wsfP"></div>
+            <input class="form-control" type="text" style="display:none" width="30px;" height="15px;" required />
+
+            <!--<div class="form-group col-md-2">
+            <label asp-for="CaptchCode" class="control-label"></label>-->
+            @*@Html.TextBoxFor(model => Model.CaptchCode,6,40,null)*@
+            <!--<input asp-for="CaptchCode" value="ViewBag.Captch" class="form-control" readonly style="height:50px; width:150px; font-size:30px; text-align:left">
+                <span asp-validation-for="CaptchCode" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="control-label">CaptchCode</label>
+                <input asp-for="OTP" class="form-control" />
+                <span asp-validation-for="OTP" class="text-danger"></span>
+            </div>-->
+            @*<div class="form-group form-check">
+                     <label class="form-check-label">
+                         <input class="form-check-input" asp-for="IsActive" />
+                         @Html.DisplayNameFor(model => model.IsActive)
+                     </label>
+                </div>*@
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <input type="submit" value="Login" class="btn btn-primary btn-block" />
+                </div>
+                <div class="form-group col-md-4">
+                    <a asp-action="Login" asp-controller="Account" class="btn btn-primary">Refresh Page</a>
+                </div>
+                <div class="form-group">
+                    <a asp-action="ForgetPassWord" asp-controller="Account" class="alert-link">Foregt Password?</a>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    
+    <div class="col-md-6">
+        <h1>External Login</h1>
+        <hr />
+        @{
+
+            var schema = await _signInManager.GetExternalAuthenticationSchemesAsync();
+            var loginProviders = schema.ToList();
+
+            if (loginProviders.Count == 0)
+            {
+                <div>No External Login Configure </div>
+            }
+            else
+            {
+
+                <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" role="form">
+                    <div>
+                        @foreach (var provider in loginProviders)
+                        {
+                            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Login  used
+                        your @provider.DisplayName Account ">
+                                @provider.Name
+                            </button>
+                        }
+                    </div>
+                </form>
+
+
+
+            }
+        }
+       
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+@*<script type="text/javascript"></script>
+
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+            async defer>
+    </script>
+    <script src="jquery-3.6.1.min.js"></script>*@
+
+<script>
+
+    $(document).ready(function () {
+        $('#ShowPassword').hover(function () {
+            $('#Password').attr('type', 'text');
+            $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+        },
+            function () {
+                $('#Password').attr('type', 'Password');
+                $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye');
+            });
+        $("#ShowPassword").click(function () {
+            $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
+        });
+
+        window.history.forward();
+        function onBack() {
+            window.history.forward();
+        }
+    });
+
+
+</script>
+
+

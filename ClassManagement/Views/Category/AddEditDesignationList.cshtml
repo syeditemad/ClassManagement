@@ -1,0 +1,34 @@
+﻿@model ClassManagement_ModelLibrary.Class_Model.DesignationList
+
+<h4>DesignationList</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddEditDesignationList">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DesignationName" class="control-label"></label>
+                <input asp-for="DesignationName" class="form-control" />
+                <span asp-validation-for="DesignationName" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="CreatedOn" class="control-label"></label>
+                <input asp-for="CreatedOn" class="form-control" />
+                <span asp-validation-for="CreatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EditedOn" class="control-label"></label>
+                <input asp-for="EditedOn" class="form-control" />
+                <span asp-validation-for="EditedOn" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,81 @@
+﻿@model ClassManagement.Models.OrderConfirmation
+
+<h4>OrderConfirmation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <form asp-action="PaymentModeList">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="ProductId" class="control-label"></label>
+                        <input asp-for="ProductId" value="@ViewBag.ProdductId" class="form-control" readonly />
+                        <span asp-validation-for="ProductId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="UserId" class="control-label"></label>
+                        <input asp-for="UserId" value="@ViewBag.userId" class="form-control" readonly />
+                        <span asp-validation-for="UserId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" value="@ViewBag.EmailList" class="form-control" readonly />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    @*<div class="form-group col-md-6">
+                        <label asp-for="product.CourseName" class="control-label"></label>
+                        <input asp-for="product.CourseName" value="@ViewBag.CoursenameList" class="form-control" readonly required />
+                        <span asp-validation-for="product.CourseName" class="text-danger"></span>
+                    </div>*@
+                    <div class="form-group col-md-6">
+                        <label asp-for="PaymentMode" class="control-label"></label>
+                        <select asp-for="PaymentMode" asp-items="ViewBag.StatusList" class="form-control">
+                            <option value="0">Select PaymentMode</option>
+                        </select>
+                        <span asp-validation-for="PaymentMode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="ContactNo" class="control-label"></label>
+                        <input asp-for="ContactNo" class="form-control" />
+                        <span asp-validation-for="ContactNo" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label asp-for="Address" class="control-label"></label>
+                        <textarea asp-for="Address" class="form-control" rows="5" cols="6"></textarea>
+                        @*<input asp-for="Address" class="form-control" />*@
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    @*<div class="form-group col-md-6">
+                <label asp-for="CreatedOn" class="control-label"></label>
+                <input asp-for="CreatedOn" class="form-control" />
+                <span asp-validation-for="CreatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="EditedOn" class="control-label"></label>
+                <input asp-for="EditedOn" class="form-control" />
+                <span asp-validation-for="EditedOn" class="text-danger"></span>
+            </div>*@
+
+
+                </div>
+                <div class="row col-md-12">
+                    <div class="form-group col-md-6">
+                        <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <a asp-action="PurchaseCourseList" class="btn btn-primary">Back to List</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+       
+    </div>
+</div>
+
+
+

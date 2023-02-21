@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ClassManagement_ModelLibrary.Class_Model.NomineeDetails>
+
+    <h5 class="text-uppercase p-2 text-center">List of NomineeDetails</h5>
+    <p>
+        <a onclick="ShowInPopUP('@Url.Action("CreateNomineeDetails", "EmployeeDetails",null,Context.Request.Scheme)', 'Create New')" class="btn btn-primary">Create New</a>
+    </p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.NomineeName)
+                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.NomineeImage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomineeWork)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateofBirth)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.AdhareCardNo)
+                </th>*@
+                @*<th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.MobileNo)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.isAcitveded)
+                </th>*@
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.NomineeName)
+                </td>*@
+
+                <td>
+                    <img src="~/image/@item.NomineeImage"
+                         class="rounded-circle"
+                         height="40" width="40"
+                         asp-append-version="true" />
+                    @item.NomineeName
+                </td>
+                 <td>
+                    @Html.DisplayFor(modelItem => item.NomineeWork)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateofBirth)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.AdhareCardNo)
+                </td>*@
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobileNo)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.isAcitveded)
+                </td>*@
+            <td>
+                <a onclick="ShowInPopUP('@Url.Action("UpdateNomineeDetails", "EmployeeDetails",new {Id= item.EmployeeId },Context.Request.Scheme)', 'Edit')" class="btn btn-primary"><i class="fa-solid fa-pen-to-square fa-lg"></i></a>
+                <a onclick="ShowInPopUP('@Url.Action("NomineeDetialsView","EmployeeDetails", new {Id=item.EmployeeId })', 'Details')" class="btn btn-info"><i class="fa-solid fa-info"></i></a> |
+                <form asp-action="DeleteNomineeDetails" asp-controller="EmployeeDetails" asp-route-id="@item.EmployeeId" onsubmit="return jqueryAjaxDelete(this);" class="d-inline">
+                    <input type="submit" value="Delete" class="btn btn-danger" data-toggle="Delete this record" />
+                </form>
+                
+                @*<a onclick="DeleteModalPopUp('@Url.Action("DeleteNomineeDetails","EmployeeDetails",new {Id=  item.EmployeeId })', 'Delete')" class="btn btn-danger">Delete</a>*@
+            </td>
+            </tr>
+            }
+        </tbody>
+    </table>

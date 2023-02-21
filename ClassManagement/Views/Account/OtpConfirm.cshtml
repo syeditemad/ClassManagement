@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Otp Confirm";
+}
+@if (TempData["Data"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Data"];
+    </div>
+}
+<h1>Your Registration Is Successfully</h1>
+<div>
+    <p>
+        Thank you for confirming your One Time Password.
+    </p>
+    <p class="text-danger" id="p1"> 
+     <h4 class="text-warning" id="_p2">Step Two  for ConfirmL Email Link Verification </h4>
+    Please Verified Your Email Account After Click the Link which is Given By Company Then You Go for Login
+    </p>
+    <p class="text-success"> After All Verification  then Go for Login </p>
+</div>
+<div>
+    <a asp-action="Login" asp-controller="Account" class="btn btn-primary">Click here TO Login</a>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        $("#p1").css('Color', "red");
+        $("#_p2").css('Color', 'LightYellow');
+    });
+
+</script>

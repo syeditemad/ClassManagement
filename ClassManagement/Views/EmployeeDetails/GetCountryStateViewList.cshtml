@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ClassManagement_ModelLibrary.Class_Model.CountryState>
+
+@if (TempData["Data"] != null)
+{
+  <p class="alert alert-success" id="successMessage">@TempData["Data"]</p>
+
+}
+<p>
+    <a asp-action="AddEditview" asp-controller="CountryState"><i class="fa-solid fa-user-plus fa-2xl"></i></a>
+    @*<a onclick="ShowInPopUP('@Url.Action("AddEditview", "CountryState",null,Context.Request.Scheme)', 'Create New')" class="btn btn-primary">Create New</a>*@
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StateCode)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.StateName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryId);
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.EditedOn)
+                </th>*@
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StateCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StateName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CountryId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.EditedOn)
+                    </td>*@
+                <td>
+                    @*<a onclick="ShowInPopUP('@Url.Action("AddEditview", "CountryState",new {Id= item.StateId },Context.Request.Scheme)', 'Edit')" class="btn btn-primary"><i class="fa-solid fa-pen-to-square fa-lg"></i></a>*@
+                    <a asp-action="AddEditview" asp-controller="CountryState" asp-route-id="@item.StateId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.StateId"><i class="fa-solid fa-info"></i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.StateId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

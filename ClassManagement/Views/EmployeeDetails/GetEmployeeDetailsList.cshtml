@@ -1,0 +1,181 @@
+﻿@model IEnumerable<ClassManagement_ModelLibrary.Class_Model.EmployeePersonelDetails>
+
+
+    <div class="input-group" style="margin-left:750px;">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+            </div>
+            <input type="text" placeholder="Search Name " id="txtID" value="@ViewBag.searchText" />
+            <input type="submit" value="Submit" id="SearchID" />
+        </div>
+    </div>
+
+
+
+<br />
+<h4 class="text-uppercase p-2 text-center"><i class="fa-solid fa-users"></i> List of EmployeeDetails</h4>
+
+<p>
+    <a asp-action="AddEditEmployeeDetails" class="btn btn-primary " data-toggle="Create"><i class="fas fa-random"></i>Create New</a>
+</p>
+<div id="Grid">
+    <table class="table table-striped" cellpadding="5" cellspacing="0" style="border: 1px solid #ccc;font-size: 9pt;">
+        <thead>
+            <tr>
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                @*<th>
+                           @Html.DisplayNameFor(model => model.MiddleName)
+                      </th>
+                     <th>
+                         @Html.DisplayNameFor(model => model.SurName)
+                      </th>
+                       <th>
+                         @Html.DisplayNameFor(model => model.Gender)
+                    </th>*@
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+
+                    @Html.DisplayNameFor(model => model.DateOfBirth)
+                </th>
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+                    @Html.DisplayNameFor(model => model.DepartMent)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>*@
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+                    @Html.DisplayNameFor(model => model.PhoneNumeber)
+                </th>
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+                    @Html.DisplayNameFor(model => model.Counties.CountryName)
+                </th>
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+
+                    @Html.DisplayNameFor(model => model.CountryState.StateName)
+                </th>
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+
+                    @Html.DisplayNameFor(model => model.Landmark)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.isActive)
+                    </th>*@
+                <th style="background-color: #B8DBFD;border: 1px solid #ccc">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="width:120px;border: 1px solid #ccc">
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.MiddleName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SurName)
+                        </td>*@
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Gender)
+                        </td>*@
+                    <td style="width:120px;border: 1px solid #ccc">
+                        @Html.DisplayFor(modelItem => item.DateOfBirth)
+                    </td>
+                    <td style="width:120px;border: 1px solid #ccc">
+                        @Html.DisplayFor(modelItem => item.DepartMent)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>*@
+                    <td style="width:120px;border: 1px solid #ccc">
+                        @Html.DisplayFor(modelItem => item.PhoneNumeber)
+                    </td>
+                    <td style="width:120px;border: 1px solid #ccc">
+                        @Html.DisplayFor(modelItem => item.Counties.CountryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CountryState.StateName)
+                    </td>
+                    <td style="width:120px;border: 1px solid #ccc">
+                        @Html.DisplayFor(modelItem => item.Landmark)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.isActive)
+                        </td>*@
+                    <td>
+                        <a asp-action="AddEditEmployeeDetails" class="btn btn-primary" asp-route-id="@item.EmployeeId"><i class="fa-solid fa-pen-to-square fa-lg"></i></a> |
+                        <a onclick="ShowModelPopUp('@Url.Action("EmployeeDetailsView","EmployeeDetails",new {Id= item.EmployeeId })', 'Details')" class="btn btn-info"><i class="fa-solid fa-info"></i></a> |
+                        @*<a asp-action="EmployeeDetialsView" class="btn btn-info" asp-route-id="@item.EmployeeId"> <i class="fa-solid fa-info"></i>Details</a> |*@
+                        @*<a asp-action="DeleteNomineeDetails" class="btn btn-danger" asp-route-id="@item.EmployeeId"><i class="fa-solid fa-trash fa-lg"></i>Delete</a>*@
+                        <form asp-action="DeleteEmployeeDetails" asp-controller="EmployeeDetails" asp-route-id="@item.EmployeeId" onsubmit="return jqueryAjaxDelete(this);" class="d-inline">
+                            <input type="submit" value="Delete" class="btn btn-danger " data-toggle="Delete this record" />
+                        </form>
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <form method="post" asp-action="ExportToPdf" asp-controller="EmployeeDetails">
+        <input type="hidden" name="GridHtml" />
+        <input type="submit" id="btnSubmit" value="Export" />
+    </form>
+    <form method="post" asp-action="ExportExcelTO" asp-controller="EmployeeDetails">
+        <input type="hidden" name="GridHtml" />
+        <input type="submit" id="btnSubmit1" value="ExportTOExcel" />
+    </form>
+</div>
+
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        $('#SearchID').click(function () {
+            var url = "@Url.Action("GetEmployeeDetailsList", "EmployeeDetails")?Filter_Value=" + $('#txtID').val()
+                location.href = url
+        })
+        //$('#Search_text').autocomplete({
+        //    Source: function (request, response) {
+        //        $.getJSON('/EmployeeDetails/GetEmployeeDetailsList?Filter_Value' + request.Filter_Value, function (data) {
+        //            response(data);
+        //        })
+        //    },
+        //    Minlength: 1,
+        //    delay: 100
+        //});
+
+        $(function () {
+            $("#btnSubmit").click(function () {
+                $("input[name='GridHtml']").val($("#Grid").html());
+            });
+        });
+
+        $(function () {
+            $("#btnSubmit1").click(function () {
+                $("input[name='GridHtml']").val($("#Grid").html());
+            });
+        });
+        $('#ExportPdf').click(function () {
+            var url = '@Url.Action("CreatePDF", "EmployeeDetails")'
+            location.href = url
+
+
+        });
+
+       
+
+
+
+    });
+</script>

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<IdentityUser>
+
+@{
+    ViewBag.Title = "All Users";
+}
+<h1>All User</h1>
+        @if (Model.Any())
+        {
+            <a asp-action="Registration" asp-controller="Account" class="btn btn-primary mb-3" style="height:auto">
+                Add new User
+            </a>
+            foreach (var user in Model)
+            {
+                <div class="card mb-3">
+                    <div class="card-header">
+                       user Id : @user.Id
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                           @user.UserName
+                        </h5>
+                    </div>
+                    <div class="card footer">
+                        <a href="#" class="btn btn-primary">Edit</a>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="card">
+                <div class="card-header">
+                    No Users Craeted yet
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Use The button  below  to Create a User
+                    </h5>
+                    <a class="btn btn-primary" style="width:auto" asp-action="Account" asp-controller="Registration">Add New User</a>
+                </div>
+                <div class="card footer">
+
+                </div>
+            </div>
+        }
